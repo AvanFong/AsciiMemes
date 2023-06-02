@@ -1,0 +1,57 @@
+import os
+import discord
+import random
+from keep_alive import keep_alive
+
+my_secret = os.environ['TOKEN']
+
+
+buddha = ("""```
+|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+|    NAMO AMITABHA YOU HAVE BEEN BLESSED! 
+|    祝你身体健康 日日见财 HUAT AH 哇啊$$$!!!  
+|                    _*_                   
+|                  _ooOoo_                 
+|                 o8888888o                  
+|                 88" . "88                     
+|                 (| -_- |)                
+|                 O\  =  /O                
+|             ____ /`---'\____             
+|            .'  \\|     |//  `.           
+|           /  \\|||  :  |||//  \\         
+|          /  _||||| -:- |||||_  \\        
+|          |   | \\\  -  /'| |   |         
+|          | \_|  `\`---'//  |_/ |         
+|          \  .-\__ `-. -'__/-.  /         
+|      ___  `. .'  /--.--\  `. .'___       
+|     ."" '<  `.___\_<|>_/___.' _> \"".    
+|    | | :  `- \`. ;`. _/; .'/ /  .' ; |   
+|    \  \ `-.   \_\_`. _.'_/_/  -' _.' /   
+|     `-.`___`-.__\ \___  /__.-'_.'_.-'⠀⠀   
+|        ⢰⣦⡀⠀⠀⠀⠀⠀⣰⣿⣿⣿⣷⣄⠀⠀⠀⠀⢀⣴⠀     
+|        ⣿⣿⣿⣿⣷⠘⣿⣿⣿⣿⣿⣿⣿⡿⣴⣿⣿⣿⣿⣿        
+|   ⢸⣦⡀⠙⢿⣿⣿⣿⣿⠆⠈⠛⣋⣉⣉⡛⠛⢾⣿⣿⣿⣿⡿⠟⢀⣤⡆   
+|   ⢸⣿⣿⣷⣄⠙⢿⠟⢁⣴⣾⣿⠿⠛⠻⣿⣿⣦⣄⠙⢿⡿⠋⣀⣴⣿⣿⠀ 
+|   ⢸⣿⣿⣿⣿⣷⣄⠐⢿⣿⠟⢁⣴⣾⣦⡀⠙⢿⣿⡷⠀⣠⣾⣿⣿⣿⣿⠀ 
+|   ⠈⣿⣿⣿⣿⣿⣿⡟⢀⣾⣿⣿⣿⣿⣿⣿⣿⣷⡀⢻⣿⣿⣿⣿⣿⣿⡏⠀⠀ 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```""")
+
+intents = discord.Intents.default()
+intents.message_content = True
+client = discord.Client(intents=intents)
+
+@client.event
+async def on_ready():
+  print(f"{client.user} is now running!")
+
+@client.event
+async def on_message(message):
+  if message.author == client.user:
+    return
+
+  if message.content.find('!pray') != -1 :
+    await message.channel.send(buddha)
+
+keep_alive()
+client.run(my_secret)
